@@ -8,23 +8,44 @@ using namespace std;
 void display(char* array);
 char* delete_text(char* source, int index, int n);
 char* delete_text_helper(char* source, char* target);
-//void remove_vowels(char* source);
-//void tokenize(const char* source, const char* delims);
+void remove_vowels(char* source);
+void tokenize(const char* source, const char* delims);
 
 
 
 int main() {
     const int MAX_LENGTH = 100;
+    const int MAX_LENGTH_OPTIONS = 1;
     char* source = new char[MAX_LENGTH];
     char* target = new char[MAX_LENGTH];
-    std::cout<<"Enter your 100 chars or less: ";
+    char* chosen_option = new char[1];
+    std::cout<<"Enter the source string:\n";
     std::cin.getline(source, MAX_LENGTH, '\n');
+    string options_str = "<Enter D(Delete), I(Insert), T(Tokenize), V(Vowel Removal) or Q(Quit)> ";
+    while(true){
+        std::cout<<options_str;
+        std::cin.getline(chosen_option, MAX_LENGTH_OPTIONS);
+        std::cout<<"chosen_option"<<chosen_option;
 
-    std::cout<<"Enter your target: ";
-    std::cin.getline(target, MAX_LENGTH, '\n');
+        if (chosen_option[0] == 'D') {
+            std::cout << "Enter your target: ";
+            std::cin.getline(target, MAX_LENGTH, '\n');
 
-    char* r = delete_text_helper(source, target);
-    display(r);
+            char* r = delete_text_helper(source, target);
+            display(r);
+        } else if (chosen_option[0] == 'I'){
+            std::cout<<"chosen_option"<<chosen_option;
+
+        } else if (chosen_option[0] == 'V'){
+            std::cout<<"chosen_option"<<chosen_option;
+
+        } else if (chosen_option[0] == 'Q'){
+            break;
+        } else{
+            continue;
+        }
+    }
+
     return 0;
 }
 
@@ -44,7 +65,6 @@ char* delete_text_helper(char* source, char* target) {
     char* result_ptr = delete_text(source, position, std::strlen(target));
     return result_ptr;
 }
-
 
 
 char* delete_text(char* source, int index, int n) {
@@ -71,6 +91,17 @@ char* delete_text(char* source, int index, int n) {
     }
     return arr;
 }
+
+
+void remove_vowels(char* source){
+    return;
+}
+
+void tokenize(const char* source, const char* delims){
+    return;
+}
+
+
 
 void display(char* array) {
     while (*array != '\0')
