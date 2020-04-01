@@ -46,6 +46,7 @@ char* delete_text_helper(char* source, char* target) {
 }
 
 
+
 char* delete_text(char* source, int index, int n) {
     int source_length = std::strlen(source);
 //    cout<< "source length "<<std::strlen(source)<<endl;
