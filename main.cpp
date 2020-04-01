@@ -20,29 +20,55 @@ void tokenize(const char* source, const char* delims);
 
 int main() {
     const int MAX_LENGTH = 100;
-    const int MAX_LENGTH_OPTIONS = 1;
     int insertion_position = 0;
-    char* source = new char[MAX_LENGTH];
-    char* target = new char[MAX_LENGTH];
+    string source {};
+    string target {};
+
     char chosen_option ['Q'];
-    std::cout << "Enter the source string:\n";
-    std::cin.getline(source, MAX_LENGTH, '\n');
-    string options_str = "<Enter D(Delete), I(Insert), T(Tokenize), V(Vowel Removal) or Q(Quit)> ";
+
+    cout << "Enter the source string: "<< std::endl;
+    getline(cin, source);
+    std::cout << "> " << source << std::endl;
+
+    int n = source.length();
+
+    // declaring character array
+    char source_array[n+1];
+
+    // copying the contents of the
+    // string to char array
+    std::strcpy(source_array, source.c_str());
+    display(source_array);
+    source.clear();
+
+    string options = "<Enter D(Delete), I(Insert), T(Tokenize), V(Vowel Removal) or Q(Quit)> ";
+
     while (true) {
-        std::cout << options_str;
+        std::cout << options<< std::endl;
         std::cin>>chosen_option;
-        std::cout << "chosen_option" << chosen_option;
-
+        std::cout << "> " << chosen_option << std::endl;
         if (chosen_option[0] == 'D') {
-            std::cout << "String to delete> ";
-            std::cin.getline(target, MAX_LENGTH, '\n');
+            std::cout << "String to delete> "<< std::endl;
+            getline(cin, target);
+            std::cout << "> " << target << std::endl;
 
-            source = delete_text_helper(source, target);
-            display(source);
+            n = target.length();
+
+            // declaring character array
+            char target_array[n+1];
+
+            // copying the contents of the
+            // string to char array
+            strcpy(target_array, target.c_str());
+            display(target_array);
+            target.clear();
+
+            char *arr_ptr = delete_text_helper(source_array, target_array);
+            display(arr_ptr);
         }
         else if (chosen_option[0] == 'I') {
             std::cout << "String to insert> ";
-            std::cin.getline(target, MAX_LENGTH, '\n');
+//            std::cin.getline(target, MAX_LENGTH, '\n');
 
             std::cout << "Position of insertion> ";
             std::cin >> insertion_position;
@@ -58,7 +84,7 @@ int main() {
         }
         else if (chosen_option[0] == 'F') {
             std::cout << "String to find> ";
-            std::cin.getline(target, MAX_LENGTH, '\n');
+//            std::cin.getline(target, MAX_LENGTH, '\n');
 
             std::cout << "Position of insertion> ";
             std::cin >> insertion_position;
@@ -66,7 +92,7 @@ int main() {
         }
         else if (chosen_option[0] == 'T') {
             std::cout << "Select a delimiter> ";
-            std::cin.getline(target, MAX_LENGTH, '\n');
+//            std::cin.getline(target, MAX_LENGTH, '\n');
 
         }
         else if (chosen_option[0] == 'Q') {
@@ -87,13 +113,7 @@ char* delete_text_helper(char* source, char* target) {
         cout << "Entered ###";
         return nullptr;
     }
-    int position =
-            ptr - source; // index of the first matched char in target array
-
-//    cout<<"display ptr"<<endl;
-//    display(ptr);
-//    cout<<"\nPostion of the first occurence "<<position<<endl;
-//    cout<<"\n Target length "<<std::strlen(target)<<endl;
+    int position = ptr - source; // index of the first matched char in target array
     char* result_ptr = delete_text(source, position, std::strlen(target));
     return result_ptr;
 }
