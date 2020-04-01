@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+#include <limits>
 
 using namespace std;
 
@@ -28,7 +29,6 @@ int main() {
 
     cout << "Enter the source string: "<< std::endl;
     getline(cin, source);
-    std::cout << "> " << source << std::endl;
 
     int n = source.length();
 
@@ -37,20 +37,21 @@ int main() {
 
     // copying the contents of the
     // string to char array
-    std::strcpy(source_array, source.c_str());
+    strcpy(source_array, source.c_str());
     display(source_array);
     source.clear();
 
     string options = "<Enter D(Delete), I(Insert), T(Tokenize), V(Vowel Removal) or Q(Quit)> ";
 
     while (true) {
-        std::cout << options<< std::endl;
-        std::cin>>chosen_option;
-        std::cout << "> " << chosen_option << std::endl;
+        cout << options<< std::endl;
+        cin>>chosen_option;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');  // <--- Requires header file <limits>.
+
+        cout << "> " << chosen_option <<endl;
         if (chosen_option[0] == 'D') {
-            std::cout << "String to delete> "<< std::endl;
+            cout << "String to delete> "<< endl;
             getline(cin, target);
-            std::cout << "> " << target << std::endl;
 
             n = target.length();
 
@@ -67,31 +68,28 @@ int main() {
             display(arr_ptr);
         }
         else if (chosen_option[0] == 'I') {
-            std::cout << "String to insert> ";
-//            std::cin.getline(target, MAX_LENGTH, '\n');
+            cout << "String to insert> ";
 
-            std::cout << "Position of insertion> ";
-            std::cin >> insertion_position;
+            cout << "Position of insertion> ";
+            cin >> insertion_position;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');  // <--- Requires header file <limits>.
 
-//            char* r = insert_text(source, target);
-//            display(r);
 
         }
         else if (chosen_option[0] == 'V') {
-            std::cout << "chosen_option" << chosen_option;
+            cout << "chosen_option" << chosen_option;
 
 
         }
         else if (chosen_option[0] == 'F') {
-            std::cout << "String to find> ";
-//            std::cin.getline(target, MAX_LENGTH, '\n');
+            cout << "String to find> ";
 
-            std::cout << "Position of insertion> ";
-            std::cin >> insertion_position;
+            cout << "Position of insertion> ";
+            cin >> insertion_position;
 
         }
         else if (chosen_option[0] == 'T') {
-            std::cout << "Select a delimiter> ";
+            cout << "Select a delimiter> ";
 //            std::cin.getline(target, MAX_LENGTH, '\n');
 
         }
@@ -108,19 +106,19 @@ int main() {
 
 char* delete_text_helper(char* source, char* target) {
     char* ptr{nullptr};
-    ptr = std::strstr(source, target); // ptr to the matched array
+    ptr = strstr(source, target); // ptr to the matched array
     if (ptr == nullptr) {
         cout << "Entered ###";
         return nullptr;
     }
     int position = ptr - source; // index of the first matched char in target array
-    char* result_ptr = delete_text(source, position, std::strlen(target));
+    char* result_ptr = delete_text(source, position, strlen(target));
     return result_ptr;
 }
 
 
 char* delete_text(char* source, int index, int n) {
-    int source_length = std::strlen(source);
+    int source_length = strlen(source);
 //    cout<< "source length "<<std::strlen(source)<<endl;
 //    cout<< "n "<<n<<endl;
 
