@@ -98,8 +98,9 @@ int main() {
             display(target_array_ptr, target_size);
 
             source_array_ptr = insert_text(source_array_ptr, target_array_ptr, insertion_position);
+            cout<<source_array_ptr<<endl;
 
-            display(source_array_ptr, str_size);
+//            display(source_array_ptr, str_size);
 
         } else if (chosen_option == 'V') {
             cout << "chosen_option" << chosen_option<<endl;
@@ -180,7 +181,7 @@ char* delete_text_helper(char* source, char* target) {
 
 char* delete_text(char* source, int index, int n) {
     size_t source_length = strlen(source);
-    size_t arr_len = source_length - n + 1;
+    size_t arr_len = source_length - n;
     string result_str (arr_len, 'a');
 //    strcpy(result_str)
 //    char* arr = new char[arr_len];
@@ -212,8 +213,8 @@ char* delete_text(char* source, int index, int n) {
 char* insert_text(char* source, const char* to_insert, int index) {
     int size_of_source = strlen(source);
     int size_of_insert = strlen(to_insert);
-    int new_source_length = size_of_source + size_of_insert + 1;
-    string result_str (new_source_length, 'a');
+    int new_source_length = size_of_source + size_of_insert;
+    string result_str (new_source_length);
     int counter = 0;
     for (int i = 0; i < index; ++i) {
         result_str.at(counter) = source[i];
@@ -248,7 +249,7 @@ void remove_vowels(char* source) {
 //    int counter{0};
     for (int i = 0; i < source_len; ++i) {
         if (source[i] == 'a' || source[i] == 'A' || source[i] == 'e' || source[i] == 'E' || source[i] == 'i'
-        ||source[i] == 'I' || source[i] == 'o' || source[i] == 'O' || source[i] == 'u' || source[i] == 'U')
+            ||source[i] == 'I' || source[i] == 'o' || source[i] == 'O' || source[i] == 'u' || source[i] == 'U')
         {
             for(int j=i; j<source_len; j++)
             {
@@ -268,7 +269,7 @@ void tokenize(const char* source, const char* delims) {
 
 void display(const char* array,  size_t size) {
     for (int i = 0; i < size; ++i) {
-        cout << array[i];
+        cout << (char) array[i];
     }
     cout << endl;
 }
