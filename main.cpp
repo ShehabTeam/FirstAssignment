@@ -98,9 +98,8 @@ int main() {
             display(target_array_ptr, target_size);
 
             source_array_ptr = insert_text(source_array_ptr, target_array_ptr, insertion_position);
-            cout<<source_array_ptr<<endl;
 
-//            display(source_array_ptr, str_size);
+            display(source_array_ptr, str_size);
 
         } else if (chosen_option == 'V') {
             cout << "chosen_option" << chosen_option<<endl;
@@ -214,7 +213,7 @@ char* insert_text(char* source, const char* to_insert, int index) {
     int size_of_source = strlen(source);
     int size_of_insert = strlen(to_insert);
     int new_source_length = size_of_source + size_of_insert;
-    string result_str (new_source_length);
+    string result_str (new_source_length, 'a');
     int counter = 0;
     for (int i = 0; i < index; ++i) {
         result_str.at(counter) = source[i];
@@ -269,7 +268,7 @@ void tokenize(const char* source, const char* delims) {
 
 void display(const char* array,  size_t size) {
     for (int i = 0; i < size; ++i) {
-        cout << (char) array[i];
+        cout << array[i];
     }
     cout << endl;
 }
